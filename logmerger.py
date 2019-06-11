@@ -99,7 +99,6 @@ def parse_logs(files, level):
     while file_handlers:
         fh = get_next_log_entry(file_handlers, level)
         yield prepare_output(fh["current_log_entry"])
-    # sys.stdout.write("\n")
 
 
 def main():
