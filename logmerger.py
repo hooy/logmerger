@@ -16,7 +16,7 @@ for i, ll in enumerate(LOG_LEVELS):
     LOG_LEVEL_PRIORITY.update({ll: LOG_LEVELS[i:]})
 
 
-def log_entry(log_string):
+def log_entry(log_string: str):
     """Converts log entry string to object using LOG_FORMAT_INPUT"""
     log = re.search(LOG_FORMAT_RE, log_string)
     entry = False
@@ -40,7 +40,7 @@ def log_read_generator(file_name: str):
                 yield entry
 
 
-def get_next_entry(fh, level):
+def get_next_entry(fh: dict, level: str):
     try:
         entry = next(fh["file_handler"])
         while (
@@ -67,7 +67,7 @@ def get_next_log_entry(file_handlers: list, level: str):
     return earliest
 
 
-def prepare_output(log_entry):
+def prepare_output(log_entry: dict):
     return LOG_FORMAT_OUTPUT.format(**log_entry)
 
 
@@ -84,7 +84,7 @@ def init_file_handlers(file_handlers: list, level: str):
     return inited_file_handlers
 
 
-def parse_logs(files, level):
+def parse_logs(files: list, level: str):
     file_handlers = []
     level = "info"
     for f in files:
