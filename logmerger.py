@@ -84,17 +84,8 @@ def init_file_handlers(file_handlers: list, level: str):
     return inited_file_handlers
 
 
-def parse_logs():
+def parse_logs(files, level):
     file_handlers = []
-    files = [
-        "log.txt",
-        "log2.txt",
-        "log3.txt",
-        "log4.txt",
-        "biglog1.txt",
-        "biglog2.txt",
-        "biglog3.txt",
-    ]
     level = "info"
     for f in files:
         file_handlers.append(
@@ -107,12 +98,21 @@ def parse_logs():
     file_handlers = init_file_handlers(file_handlers, level)
     while file_handlers:
         fh = get_next_log_entry(file_handlers, level)
-        sys.stdout.write(prepare_output(fh["current_log_entry"]))
+        yield prepare_output(fh["current_log_entry"])
     # sys.stdout.write("\n")
 
 
 def main():
-    parse_logs()
+    files = [
+        "log.txt",
+        "log2.txt",
+        "log3.txt",
+        "log4.txt",
+        "biglog1.txt",
+        "biglog2.txt",
+        "biglog3.txt",
+    ]
+    parse_logs(files, "info")
 
 
 if __name__ == "__main__":
