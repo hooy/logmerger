@@ -86,7 +86,6 @@ def init_file_handlers(file_handlers: list, level: str):
 
 def parse_logs(files: list, level: str):
     file_handlers = []
-    level = "info"
     for f in files:
         file_handlers.append(
             {
